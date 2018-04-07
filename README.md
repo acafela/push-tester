@@ -1,5 +1,5 @@
-#Push Simple Service
+# Push Simple Service
 Simple push sending service using APNs, GCM.
 
-##How to use
+## How to use
 TODO
