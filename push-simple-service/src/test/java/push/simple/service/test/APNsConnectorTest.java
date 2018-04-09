@@ -13,7 +13,7 @@ import javapns.notification.PushNotificationPayload;
 import javapns.notification.PushedNotifications;
 import push.simple.service.APNsConnector;
 
-public class APNsTest {
+public class APNsConnectorTest {
 	
 	String _KEYSTORE_PATH;
 	String _KEYSTOREPASSWORD;

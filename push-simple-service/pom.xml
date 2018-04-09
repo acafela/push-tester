@@ -22,12 +22,27 @@
 		<scope>test</scope>
 	</dependency>
     
-    <!-- APNS -->
+    <!-- APNs -->
 	<dependency>
 	    <groupId>com.github.fernandospr</groupId>
 	    <artifactId>javapns-jdk16</artifactId>
 	    <version>2.2.1</version>
 	</dependency>
+	
+	<!-- GCM -->
+	<dependency>
+	    <groupId>com.ganyo</groupId>
+	    <artifactId>gcm-server</artifactId>
+	    <version>1.0.2</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.3.2</version>
+	</dependency>
+	
 	    
   </dependencies>
 </project>
