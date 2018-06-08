@@ -1,8 +1,5 @@
 package push.simple.service;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -12,9 +9,7 @@ public class PushProperties {
 	
 	PushProperties(String propFilePath) throws IOException {
 		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource(propFilePath).getFile());
-		FileInputStream fis = new FileInputStream(file);
-		props.load(new BufferedInputStream(fis));
+		props.load(classLoader.getResourceAsStream(propFilePath));
 	}
 	
 	String getProperty(String key) {

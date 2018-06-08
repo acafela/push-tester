@@ -17,10 +17,10 @@ import javapns.notification.PushedNotifications;
 public class Main {
 	
 	static final Logger logger = Logger.getLogger(Main.class);
-	final static String _PROPERTIES_FILE_NAME = "push.properties";
+	final static String _PROPERTIES_PATH = "push.properties";
 	
 	public static void main(String[] args) {
-        
+		
 		if(args.length < 3) {
 			printHelpMessage();
 			return;
@@ -28,7 +28,7 @@ public class Main {
 		
 		PushProperties pushProp;
 		try {
-			pushProp = new PushProperties(_PROPERTIES_FILE_NAME);
+			pushProp = new PushProperties(_PROPERTIES_PATH);
 		} catch (IOException e) {
 			logger.error("push.properties was not founded!");
 			return;
