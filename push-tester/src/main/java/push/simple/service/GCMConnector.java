@@ -16,6 +16,8 @@ import com.google.android.gcm.server.Sender;
  */
 public class GCMConnector {
 	
+	public static final String _DEFAULT_MESSAGE_KEY = "message";	
+	
 	private Sender sender;
 	private GCMConfig config;
 	
@@ -27,6 +29,15 @@ public class GCMConnector {
 		this.config = gcmConfig;
 	}
 	
+	public List<Result> send(String message, List<String> targetIds) throws IOException{
+		Message gcmMessage = buildSimpleMessage(message);
+		return send(gcmMessage, targetIds);
+	}
+	
+	private Message buildSimpleMessage(String message) {
+		return new Message.Builder().addData(_DEFAULT_MESSAGE_KEY, message).build();
+	}
+
 	public List<Result> send(Message message, List<String> targetIds) throws IOException{
 		List<Result> results = new ArrayList<Result>();
 		if(!targetIds.isEmpty()){

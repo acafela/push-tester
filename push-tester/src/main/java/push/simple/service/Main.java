@@ -3,10 +3,10 @@ package push.simple.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import org.json.JSONException;
 
@@ -14,40 +14,49 @@ import com.google.android.gcm.server.Result;
 
 import javapns.communication.exceptions.CommunicationException;
 import javapns.communication.exceptions.KeystoreException;
-import javapns.notification.PushNotificationPayload;
 import javapns.notification.PushedNotifications;
 
 public class Main {
+	
 	public static void main(String[] args) {
-		//apns pushkey message keystore_path keystore_password
-		//gcm pushkey message API_KEY
-		if(args.length < 1) {
-			printHelpMessage();
+		printHelpMessage();
+        System.out.print("Enter : ");
+        
+        String cmd = "";
+        Scanner scanner = new Scanner(System.in);
+        try {
+        	cmd = scanner.nextLine();			
+		} finally {
+			scanner.close();
+		}
+        
+        String[] cmds = cmd.split(" ");
+		
+		if(cmds.length < 1) {
+			printIllegalArgumentMessage();
 			return;
 		}
 		
-		String pushType = args[0].toLowerCase();
+		String pushType = cmds[0].toLowerCase();
 		if(pushType.equals("apns")) {
-			if(validateApnsArgs(args)) {
-				String pushKey = args[1];
-				String message = args[2];
-				String keystorePath = args[3];
-				String keystorePassword = args[4];
+			if(validateApnsArgs(cmds)) {
+				String pushKey = cmds[1];
+				String message = cmds[2];
+				String keystorePath = cmds[3];
+				String keystorePassword = cmds[4];
 				sendApns(pushKey, message, keystorePath, keystorePassword);
 			}
 		} else if (pushType.equals("gcm")) {
-			if(validateGcmArgs(args)) {
-				String pushKey = args[1];
-				String message = args[2];
-				String apiKey = args[3];
+			if(validateGcmArgs(cmds)) {
+				String pushKey = cmds[1];
+				String message = cmds[2];
+				String apiKey = cmds[3];
 				sendGcm(pushKey, message, apiKey);
 			}
 		} else {
-			printHelpMessage();
+			System.out.println("Only APNs, GCM are supported.");
 			return;
-		}
-		
-		
+		}	
 	}
 
 	private static void sendGcm(String pushKey, String message, String apiKey) {
@@ -65,6 +74,7 @@ public class Main {
 
 	private static boolean validateGcmArgs(String[] args) {
 		if(args.length < 4) {
+			printIllegalArgumentMessage();
 			return false;
 		}
 		return true;
@@ -87,9 +97,10 @@ public class Main {
 
 	private static boolean validateApnsArgs(String[] args) {
 		if(args.length < 5) {
+			printIllegalArgumentMessage();
 			return false;
 		}
-		if(Files.exists(Paths.get(args[3]))) {
+		if(!Files.exists(Paths.get(args[3]))) {
 			System.out.println("Keystore file does not exists!");
 			return false;
 		}
@@ -97,7 +108,14 @@ public class Main {
 	}
 
 	private static void printHelpMessage() {
-		System.out.println("APNs - [apns {message} {keystore path} {keystore password}]");
+		System.out.println("Enter as follow..\n"
+				+ "APNs - [apns {pushkey} {message} {keystore path} {keystore password}]\n"
+				+ "GCM - [gcm {pushkey} {message}] {API KEY}\n"
+				+ "\t* Pushkey means registration id issued by APNs, GCM");
+	}
+	
+	private static void printIllegalArgumentMessage() {
+		System.out.println("Invaild Values..!");
 	}
 	
 	

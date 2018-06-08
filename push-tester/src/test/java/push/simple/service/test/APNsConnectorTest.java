@@ -20,14 +20,14 @@ public class APNsConnectorTest {
 	
 	@Before
 	public void setKeystore(){
-		_KEYSTORE_PATH = "C:/ys/test/APNs/apns-test.p12";
-		_KEYSTOREPASSWORD = "adt1234";
+		_KEYSTORE_PATH = "/Users/yshwang/Documents/test/apns-test.p12";
+		_KEYSTOREPASSWORD = "your password";
 	}
 
 	@Test
 	public void test() throws JSONException {
 		PushNotificationPayload payload = new PushNotificationPayload();
-		payload.addAlert("Today is sunday~");
+		payload.addAlert("Today is friday~");
 		payload.addBadge(1);
 		payload.addSound("default");
 		
@@ -37,6 +37,7 @@ public class APNsConnectorTest {
 		try {
 			PushedNotifications sendResult = connector.send(payload, sendPushkeys);
 			System.out.println("Send result : " + sendResult);
+			//Send result : [[1] transmitted {"aps":{"badge":1,"alert":"Today is friday~","sound":"default"}} on first attempt to token 67df4..7a983]
 		} catch (CommunicationException e) {
 			System.out.println("Error occurs while trying to communicate with Apple servers!");
 			e.printStackTrace();
