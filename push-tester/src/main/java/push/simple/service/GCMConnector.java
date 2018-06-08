@@ -38,6 +38,14 @@ public class GCMConnector {
 		return new Message.Builder().addData(_DEFAULT_MESSAGE_KEY, message).build();
 	}
 
+	/**
+	 * 푸시 발송 요청
+	 * 
+	 * @param message 푸시 발송 메세지
+	 * @param targetIds 푸시 발송 대상(GCM에서 발급 받은 푸시키)
+	 * @return 발송결과 리스트
+	 * @throws IOException
+	 */
 	public List<Result> send(Message message, List<String> targetIds) throws IOException{
 		List<Result> results = new ArrayList<Result>();
 		if(!targetIds.isEmpty()){
@@ -48,8 +56,13 @@ public class GCMConnector {
 	}
 	
 	/**
-	 * 분할 발송
-	 * @throws IOException 
+	 * {@code splitCount} 단위로 분할해서 푸시 발송 요청
+	 * 
+	 * @param message 푸시 발송 메세지
+	 * @param targetIds 푸시 발송 대상(GCM에서 발급 받은 푸시키)
+	 * @param splitCount 분할 발송할 카운트
+	 * @return 발송결과 리스트
+	 * @throws IOException
 	 */
 	public List<Result> sendAsSplit(Message message, List<String> targetIds, int splitCount) throws IOException{
 		
@@ -82,27 +95,4 @@ public class GCMConnector {
 		
 		return results;
 	}
-	
-	//참고
-//	Message.Builder	gcmMessage	= new Message.Builder();
-//	gcmMessage.timeToLive( certificateInfo.getTimeToLive() );
-//	gcmMessage.delayWhileIdle( certificateInfo.isDelayWhileIdle() );
-//	gcmMessage.addData( KEY_BADGE,		String.valueOf( pushMessage.getBadge() ) );
-//	gcmMessage.addData( KEY_MESSAGE_ID,	pushMessage.getMessageId() );
-//	gcmMessage.addData( KEY_HAS_BIN, String.valueOf( pushMessage.hasBin() ) );
-//	
-//	/**
-//	 * 2017.03.13 - Push 제목 필드 추가
-//	 */
-//	gcmMessage.addData( KEY_TITLE, pushMessage.getSubject() );
-//	
-//	byte[]	data = pushMessage.getMessage().getBytes();
-//	if ( MESSAGE_LIMITATION_BYTES_LENGTH > data.length ) {
-//		gcmMessage.addData( KEY_MESSAGE, pushMessage.getMessage() );
-//	} else {
-//		String	msg	= new String( data, 0, MESSAGE_LIMITATION_BYTES_LENGTH );
-//		String	filteredMessage = msg.substring( 0, msg.length() - 1 );		// the reason why "msg.length() - 1" is to remove a broken last character...  
-//		gcmMessage.addData( KEY_MESSAGE, filteredMessage );
-//	}
-
 }
