@@ -1,4 +1,6 @@
 *.class
+.DS_Store
+push-tester/target/
 
 # log file
 *.log
