@@ -28,7 +28,7 @@
 - Ex) iOS 푸시발송, 내용 : helloworld, 푸시키 : 67df4ce50b922
 
   ```
-  java -jar push-tester-1.0.0.jar apns 67df4ce50b922 helloworld
+  java -jar target/push-tester-1.0.0.jar apns 67df4ce50b922 helloworld
   ```
 
 ## TODO
