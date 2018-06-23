@@ -21,7 +21,7 @@
 - 빌드 및 실행
   ```
   mvn install -DskipTests
-  java -jar push-tester-1.0.0.jar {apns|gcm} {pushkey} {message}
+  java -jar target/push-tester-1.0.0.jar {apns|gcm} {pushkey} {message}
   ```
 
 
