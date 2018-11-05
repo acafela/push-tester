@@ -20,8 +20,8 @@ public class APNsConnectorTest {
 	
 	@Before
 	public void setKeystore(){
-		_KEYSTORE_PATH = "/Users/yshwang/Documents/test/apns-test.p12";
-		_KEYSTOREPASSWORD = "your password";
+		_KEYSTORE_PATH = "/Users/yshwang/Documents/temp/maasbu_agent_dev.p12";
+		_KEYSTOREPASSWORD = "1234";
 	}
 
 	@Test
@@ -31,7 +31,7 @@ public class APNsConnectorTest {
 		payload.addBadge(1);
 		payload.addSound("default");
 		
-		List<String> sendPushkeys = Arrays.asList("67df4ce50b922ce79cb71e4e7d6d3ead93cd2b184e44fe7cb13ede53b327a983");
+		List<String> sendPushkeys = Arrays.asList("a69754ab4ca52af6ae300863aef73ef8a08b4449831d673c548912999a139a0e");
 		
 		APNsConnector connector = new APNsConnector(_KEYSTORE_PATH, _KEYSTOREPASSWORD);
 		try {
