@@ -6,12 +6,14 @@ import java.text.ParseException;
 
 import org.junit.Test;
 
+import push.tester.utils.old.Args_old;
+
 public class ArgsTests {
 	
 	@Test
 	public void test() throws ParseException {
 		String[] args = new String[] {"ls", "-la", "-m", "ok"};
-		Args arg = new Args("l,a,s,b,m*", args);
+		Args_old arg = new Args_old("l,a,s,b,m*", args);
 
 		System.out.println(arg.getString('m'));
 		
