@@ -12,7 +12,7 @@
 - 다운로드
 
   ```
-  git clone https://github.com/younsunghwang/push-tester
+  git clone https://github.com/acafela/push-tester
   ```
 
 - APNs, GCM 정보 설정
